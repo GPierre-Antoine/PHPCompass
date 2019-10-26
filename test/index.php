@@ -1,3 +1,4 @@
+#!/usr/bin/php -f
 <?php
 
 echo 1;
@@ -10,7 +11,7 @@ test
 
 <?php
 
-if (true) echo 1;
+IF (true) eCho 1;
 
 echo 1;
 
@@ -41,4 +42,4 @@ class zsx extends aqw implements aze {}
 
 function(){echo 1;};
 
-1<<2;
+[];
