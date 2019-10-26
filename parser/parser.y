@@ -6,6 +6,7 @@
 #include <stdexcept>
 
 int yylex();
+
 void yyerror (char const *s)
 {
     throw std::runtime_error(s);
@@ -154,4 +155,6 @@ array_notation: k_array parenthesis_open array_list parenthesis_close
 
 array_list:
 | value
+| value s_comma array_list
 | literal s_double_arrow value
+| literal s_double_arrow value s_comma array_list

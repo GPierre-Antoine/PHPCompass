@@ -11,8 +11,7 @@
 
 %}
 
-%option noyywrap
-%option nodefault
+%option noyywrap nodefault caseless yylineno
 
 %x PHP
 %x IN_STRING
@@ -40,6 +39,46 @@
 
 <PHP>"?>" {
     BEGIN INITIAL;
+}
+
+<PHP>"true" {
+    yield(k_true);
+}
+
+<PHP>"false" {
+    yield(k_false);
+}
+
+<PHP>"null" {
+    yield(k_null);
+}
+
+<PHP>"if" {
+    yield(k_if);
+}
+
+<PHP>"elseif" {
+    yield(k_elseif);
+}
+
+<PHP>"else" {
+    yield(k_else);
+}
+
+<PHP>"for" {
+    yield(k_for);
+}
+
+<PHP>"foreach" {
+    yield(k_foreach);
+}
+
+<PHP>"while" {
+    yield(k_while);
+}
+
+<PHP>"do" {
+    yield(k_do);
 }
 
 . ;
