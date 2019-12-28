@@ -11,4 +11,4 @@ configure_file(
 )
 include_directories("${PROJECT_BINARY_DIR}")
 
-add_executable(magnet ${CMAKE_CURRENT_SOURCE_DIR}/main.cpp)
+add_executable(magnet ${CMAKE_CURRENT_SOURCE_DIR}/main.cpp src/symbol.cpp src/symbol.h)
