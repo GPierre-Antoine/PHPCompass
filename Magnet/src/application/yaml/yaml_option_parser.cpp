@@ -57,7 +57,7 @@ void yaml_option_parser::filter_nodes(const YAML::Node & node)
         {
             parse_error("filtered item must be a string");
         }
-        app.filter_folder(string_node.as<std::string>());
+        app.add_configuration(std::make_pair("filters", string_node.as<std::string>()));
     }
 }
 

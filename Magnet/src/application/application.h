@@ -12,6 +12,15 @@
 
 class application
 {
+public:
+
+    virtual void run() = 0;
+    virtual void add_configuration(const std::pair<std::string, std::string> & configuration) = 0;
+    ~application() = default;
+};
+
+class map_php_application : public application
+{
 private:
     std::vector<std::string> args;
     std::vector<std::string> filters;
@@ -19,9 +28,10 @@ private:
     void parse_options();
     [[nodiscard]] bool iterator_is_invalid() const;
     void ensure_has_next_arg();
-public:
-    application(int argc, char **argv);
-    void run();
     void configure_from_yaml(const std::filesystem::path & path);
-    void filter_folder(const std::string & filename);
+public:
+    map_php_application(int argc, char **argv);
+    void run() override;
+    void add_configuration(const std::pair<std::string, std::string> & configuration) override;
+    ~map_php_application() = default;
 };

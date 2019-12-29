@@ -19,7 +19,7 @@
 
 namespace fs = std::filesystem;
 
-application::application(int argc, char **argv)
+map_php_application::map_php_application(int argc, char **argv)
         : args(argc), filters()
 {
     for (auto i = 0; i < argc; ++i)
@@ -28,7 +28,7 @@ application::application(int argc, char **argv)
     }
 }
 
-void application::run()
+void map_php_application::run()
 {
     parse_options();
     std::vector<fs::path> pathList;
@@ -51,7 +51,7 @@ void application::run()
     std::cout << std::endl;
 
 }
-void application::parse_options()
+void map_php_application::parse_options()
 {
     for (arg_iterator = args.begin(); arg_iterator != args.end(); ++arg_iterator)
     {
@@ -69,12 +69,12 @@ void application::parse_options()
         }
     }
 }
-bool application::iterator_is_invalid() const
+bool map_php_application::iterator_is_invalid() const
 {
     return this->arg_iterator == this->args.end();
 }
 
-void application::ensure_has_next_arg()
+void map_php_application::ensure_has_next_arg()
 {
     ++this->arg_iterator;
     if (iterator_is_invalid())
@@ -82,12 +82,20 @@ void application::ensure_has_next_arg()
         throw std::runtime_error("option parse error");
     }
 }
-void application::configure_from_yaml(const std::filesystem::path & path)
+void map_php_application::configure_from_yaml(const std::filesystem::path & path)
 {
     yaml_option_parser parser(*this, path);
     parser.import();
 }
-void application::filter_folder(const std::string & filename)
+
+void map_php_application::add_configuration(const std::pair<std::string, std::string> & configuration)
 {
-    filters.push_back(filename);
+    if (configuration.first == "filters")
+    {
+        filters.push_back(configuration.second);
+    }
+    else
+    {
+        throw std::runtime_error("unknown configuration " + configuration.first);
+    }
 }

@@ -6,7 +6,7 @@ int main(int argc, char *argv[])
 {
     try
     {
-        application app(argc, argv);
+        map_php_application app(argc, argv);
         app.run();
     }
     catch (std::runtime_error & e)
