@@ -5,6 +5,7 @@
 #include <list>
 #include "config.h"
 #include "src/symbol.h"
+#include "src/iterator/target_file_iterator.h"
 
 
 using std::cout;
@@ -18,23 +19,13 @@ int main(int argc, char *argv[])
     cout << "Version " << PHPCOMPASS_VERSION_MAJOR << "." << PHPCOMPASS_VERSION_MINOR << endl;
     cout << "Current path is: " << fs::current_path() << endl;
 
-    std::vector<std::string> ignore_list{".idea", ".git", "_vendors", "PHPMailer", "html2pdf", "tests"};
     std::vector<fs::path> pathList;
+    auto iterator = target_file_iterator(
+            fs::current_path(), {".idea", ".git", "_vendors", "PHPMailer", "html2pdf", "tests"}
+    );
 
-    for (auto i = fs::recursive_directory_iterator(fs::current_path()); i != fs::recursive_directory_iterator(); ++i)
+    while (auto i = iterator.reach_next())
     {
-        if (i->is_directory())
-        {
-            if (std::find(ignore_list.begin(), ignore_list.end(), i->path().filename()) != ignore_list.end())
-            {
-                i.disable_recursion_pending();
-            }
-            continue;
-        }
-        if (i->path().extension() != ".php")
-        {
-            continue;
-        }
         pathList.push_back(*i);
     }
 

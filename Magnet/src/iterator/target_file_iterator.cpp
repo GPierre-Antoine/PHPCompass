@@ -34,7 +34,7 @@ std::optional<std::filesystem::path> target_file_iterator::reach_next()
         {
             continue;
         }
-        return std::optional<std::filesystem::path>(*iterator);
+        return std::optional<std::filesystem::path>(*(iterator++));
     }
     return std::optional<std::filesystem::path>();
 }
