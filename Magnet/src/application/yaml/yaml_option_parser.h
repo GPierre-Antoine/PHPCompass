@@ -12,14 +12,15 @@
 class yaml_option_parser
 {
 private:
-    application & app;
-    std::filesystem::path path;
+    optionnable & carrier;
+    std::vector<YAML::Node> config;
     void parse_yaml_option(const std::string & a_string, const YAML::Node & node);
-public:
-    explicit yaml_option_parser(application & application, std::filesystem::path path);
-    void import();
     void filter_nodes(const YAML::Node & node);
     static void parse_error(const std::string & string);
+public:
+    explicit yaml_option_parser(optionnable & optionnable, std::vector<YAML::Node> config);
+    static yaml_option_parser from_file(optionnable & optionnable, const std::filesystem::path & path);
+    void import();
 };
 
 #endif //PHPCOMPASS_YAML_OPTION_PARSER_H

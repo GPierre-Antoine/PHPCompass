@@ -84,7 +84,7 @@ void map_php_application::ensure_has_next_arg()
 }
 void map_php_application::configure_from_yaml(const std::filesystem::path & path)
 {
-    yaml_option_parser parser(*this, path);
+    auto parser = yaml_option_parser::from_file(*this, path);
     parser.import();
 }
 

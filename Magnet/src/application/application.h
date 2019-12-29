@@ -15,11 +15,17 @@ class application
 public:
 
     virtual void run() = 0;
-    virtual void add_configuration(const std::pair<std::string, std::string> & configuration) = 0;
     ~application() = default;
 };
 
-class map_php_application : public application
+class optionnable
+{
+public:
+    virtual void add_configuration(const std::pair<std::string, std::string> & configuration) = 0;
+    ~optionnable() = default;
+};
+
+class map_php_application : public application, public optionnable
 {
 private:
     std::vector<std::string> args;
