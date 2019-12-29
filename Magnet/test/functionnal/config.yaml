@@ -1,0 +1,7 @@
+filters:
+  - .git
+  - .idea
+  - tests
+  - PHPMailer
+  - _vendors
+  - html2pdf
