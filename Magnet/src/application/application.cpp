@@ -38,7 +38,7 @@ void application::run()
             fs::current_path(), ".php", filters
     );
 
-    while (auto i = iterator.reach_next())
+    while (auto i = iterator.next())
     {
         pathList.push_back(*i);
     }

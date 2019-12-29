@@ -20,7 +20,7 @@ target_file_iterator::target_file_iterator(
 
 }
 
-std::optional<std::filesystem::path> target_file_iterator::reach_next()
+std::optional<std::filesystem::path> target_file_iterator::next()
 {
     for (; iterator != std::filesystem::recursive_directory_iterator(); ++iterator)
     {

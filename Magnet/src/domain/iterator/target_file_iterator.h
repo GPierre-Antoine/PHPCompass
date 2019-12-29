@@ -20,5 +20,6 @@ public:
     target_file_iterator(
             const std::filesystem::path & path, std::string extension, std::vector<std::string> ignore_list
     );
-    std::optional<std::filesystem::path> reach_next();
+    target_file_iterator(const target_file_iterator &) = default;
+    std::optional<std::filesystem::path> next();
 };
