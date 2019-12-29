@@ -7,13 +7,15 @@
 #include "target_file_iterator.h"
 
 
-target_file_iterator::target_file_iterator(const std::filesystem::path & path)
-        : iterator(path), ignore_list()
+target_file_iterator::target_file_iterator(const std::filesystem::path & path, std::string extension)
+        : iterator(path), look_for(std::move(extension)), ignore_list()
 {
 }
 
-target_file_iterator::target_file_iterator(const std::filesystem::path & path, std::vector<std::string> ignore_list)
-        : iterator(path), ignore_list(std::move(ignore_list))
+target_file_iterator::target_file_iterator(
+        const std::filesystem::path & path, std::string extension, std::vector<std::string> ignore_list
+)
+        : iterator(path), look_for(std::move(extension)), ignore_list(std::move(ignore_list))
 {
 
 }
@@ -30,7 +32,7 @@ std::optional<std::filesystem::path> target_file_iterator::reach_next()
             }
             continue;
         }
-        if (iterator->path().extension() != ".php")
+        if (iterator->path().extension() != look_for)
         {
             continue;
         }

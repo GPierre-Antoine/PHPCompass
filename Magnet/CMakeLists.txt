@@ -11,11 +11,9 @@ configure_file(
 )
 include_directories("${PROJECT_BINARY_DIR}")
 
-set(CSRC ${CMAKE_CURRENT_SOURCE_DIR}/src)
-
 add_executable(magnet ${CMAKE_CURRENT_SOURCE_DIR}/main.cpp
-        ${CSRC}/symbol.cpp
-        ${CSRC}/symbol.h
-        ${CSRC}/iterator/target_file_iterator.cpp
-        ${CSRC}/iterator/target_file_iterator.h
-        )
+        src/domain/parse/symbol.cpp
+        src/domain/parse/symbol.h
+        src/domain/iterator/target_file_iterator.cpp
+        src/domain/iterator/target_file_iterator.h
+        src/application/application.cpp src/application/application.h)
