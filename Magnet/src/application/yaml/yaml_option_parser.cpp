@@ -41,7 +41,7 @@ void yaml_option_parser::filter_nodes(const YAML::Node & node)
         {
             parse_error("filtered item must be a string");
         }
-        carrier.add_configuration(std::make_pair("filters", string_node.as<std::string>()));
+        carrier.add_configuration("filters", {string_node.as<std::string>()});
     }
 }
 
