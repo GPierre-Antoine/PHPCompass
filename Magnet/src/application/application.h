@@ -22,6 +22,7 @@ class optionnable
 {
 public:
     virtual void add_configuration(const std::pair<std::string, std::string> & configuration) = 0;
+    virtual void parse_options() = 0;
     ~optionnable() = default;
 };
 
@@ -31,12 +32,12 @@ private:
     std::vector<std::string> args;
     std::vector<std::string> filters;
     std::vector<std::string>::iterator arg_iterator;
-    void parse_options();
     [[nodiscard]] bool iterator_is_invalid() const;
     void ensure_has_next_arg();
     void configure_from_yaml(const std::filesystem::path & path);
 public:
     map_php_application(int argc, char **argv);
+    void parse_options() override;
     void run() override;
     void add_configuration(const std::pair<std::string, std::string> & configuration) override;
     ~map_php_application() = default;
