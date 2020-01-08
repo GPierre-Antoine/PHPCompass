@@ -28,6 +28,18 @@ void yaml_option_parser::import()
     }
 }
 
+void yaml_option_parser::parse_yaml_option(const std::string & a_string, const YAML::Node & node)
+{
+    if (a_string == "filters")
+    {
+        this->filter_nodes(node);
+    }
+    else
+    {
+        parse_error("node isnt unknown key " + a_string);
+    }
+}
+
 void yaml_option_parser::filter_nodes(const YAML::Node & node)
 {
     if (!node.IsSequence())
@@ -41,19 +53,7 @@ void yaml_option_parser::filter_nodes(const YAML::Node & node)
         {
             parse_error("filtered item must be a string");
         }
-        carrier.add_configuration("filters", {string_node.as<std::string>()});
-    }
-}
-
-void yaml_option_parser::parse_yaml_option(const std::string & a_string, const YAML::Node & node)
-{
-    if (a_string == "filters")
-    {
-        this->filter_nodes(node);
-    }
-    else
-    {
-        parse_error("node isnt unknown key " + a_string);
+        carrier.add_filter({string_node.as<std::string>()});
     }
 }
 

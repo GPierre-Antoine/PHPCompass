@@ -88,32 +88,7 @@ void map_php_application::configure_from_yaml(const std::filesystem::path & path
     parser.import();
 }
 
-void map_php_application::add_configuration(const std::string & key, const std::vector<std::string> & values)
+void map_php_application::add_filter(const std::string & a_string)
 {
-    this->assert_size(key, values);
-    if (key == "filters")
-    {
-        filters.push_back(values[0]);
-    }
-    else
-    {
-        throw std::runtime_error("unknown configuration " + key);
-    }
-}
-std::size_t map_php_application::expect_configuration(const std::string & a_string) const
-{
-    if (a_string == "filters")
-    {
-        return 1;
-    }
-    return 0;
-}
-
-void map_php_application::assert_size(const std::string & key, const std::vector<std::string> & values) const
-{
-    auto expected = this->expect_configuration(key);
-    if (values.size() != expected)
-    {
-        throw std::runtime_error("parse error " + key + " expects " + std::to_string(expected) + " elements");
-    }
+    filters.push_back(a_string);
 }
